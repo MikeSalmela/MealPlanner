@@ -31,6 +31,11 @@ std::string FoodItem::name() const
     return  name_;
 }
 
+int FoodItem::cal(int g) const
+{
+    return cal100g_*g/100;
+}
+
 int FoodItem::prot(int g) const
 {
     return prot_*g/100;

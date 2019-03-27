@@ -11,6 +11,7 @@ public:
     FoodItem(const std::string& csvLine);
 
     std::string name() const;
+    int         cal (int g) const;
     int         prot(int g) const;
     int         carb(int g) const;
     int         fat (int g) const;

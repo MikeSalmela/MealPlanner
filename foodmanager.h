@@ -13,6 +13,8 @@ public:
     FoodManager(const std::string& path);
     bool addItem(const std::string& csvLine);
 
+    FoodItem *getFood(const std::string &name);
+
 private:
     std::string filepath_;
     std::vector<std::unique_ptr<FoodItem>> foodItems_;

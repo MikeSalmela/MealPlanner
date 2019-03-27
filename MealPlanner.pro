@@ -6,8 +6,10 @@ CONFIG -= qt
 SOURCES += \
         main.cpp \
     fooditem.cpp \
-    foodmanager.cpp
+    foodmanager.cpp \
+    logger.cpp
 
 HEADERS += \
     fooditem.h \
-    foodmanager.h
+    foodmanager.h \
+    logger.h

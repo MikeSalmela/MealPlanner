@@ -5,20 +5,18 @@
 FoodManager::FoodManager(const std::string& path) : filepath_(path)
 {
     readData();
-    std::string a = "testi";
-    addItem(a);
 }
 
 bool FoodManager::readData()
 {
-    std::ifstream file;
-    file.open(filepath_);
+    std::ifstream file(filepath_);
     if(!file.is_open())
     {
         std::cout << "Failed to open file" << std::endl;
         file.close();
         return false;
     }
+
     std::string line;
     int lineNumber = 0;
     while(getline(file, line))
@@ -26,9 +24,12 @@ bool FoodManager::readData()
         ++lineNumber;
         if(line.length() > 0 && line[0] != comment_)
         {
-            try {
+            try
+            {
                 foodItems_.push_back(std::make_unique<FoodItem>(line));
-            } catch (std::exception& e) {
+            }
+            catch (std::exception& e)
+            {
                 std::cerr << e.what() << " in line " << lineNumber << std::endl;
             }
         }
@@ -53,7 +54,26 @@ bool FoodManager::addItem(const std::string& csvLine)
         file.close();
         return false;
     }
-
+    try
+    {
+        foodItems_.push_back(std::make_unique<FoodItem>(csvLine));
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
     file.close();
     return  true;
+}
+
+FoodItem *FoodManager::getFood(const std::string &name)
+{
+    for(auto& food : foodItems_)
+    {
+        if(food->name() == name)
+        {
+            return  food.get();
+        }
+    }
+    return  nullptr;
 }
