@@ -2,17 +2,30 @@
 #include "foodmanager.h"
 #include "logger.h"
 
-int main()
+int main(int argc, char** args)
 {
     FoodManager f("foods.txt");
-    Logger l("test2.txt");
-    l.addItem(f.getFood("pasta"), 300);
-    l.addItem(f.getFood("groundbeef20"), 400);
-    l.addItem(f.getFood("egg"), 200);
-    l.addItem(f.getFood("milk"), 1000);
-    l.addItem(f.getFood("ryebread"), 50);
-    l.addItem(f.getFood("ketchup"), 100);
-    std::cout << l.summary() << std::endl;
+    Logger l(".log");
+
+
+    if(argc == 1 )
+    {
+        std::cout << l.summary();
+        return 0;
+    }
+    std::string command = args[1];
+
+    if ( command == "add" )
+    {
+        std::string food = args[2];
+        int g = std::stoi(args[3]);
+        l.addItem(f.getFood(food), g);
+        std::cout << "added item " << food << g << std::endl;
+    }
+    if (command == "today")
+    {
+
+    }
 
     return 0;
 }

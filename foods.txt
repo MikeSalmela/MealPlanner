@@ -5,3 +5,4 @@ milk;46;3;5;2
 egg;143;13;1;10
 ryebread;259;9;48;3
 ketchup;80;1;18;0
+vegetables;50;3;8;1

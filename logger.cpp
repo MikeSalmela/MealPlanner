@@ -11,7 +11,6 @@ Logger::Logger()
 Logger::Logger(const std::string &logFile) : file_(logFile)
 {
     readTarget();
-    std::cout << getDate() << std::endl;
 }
 
 void Logger::addItem(FoodItem *food, int g)
@@ -51,13 +50,24 @@ std::string Logger::summary(const std::string &date) const
         }
     }
 
+    int remaining = targetCals_ - cal;
+    std::string remainingStr;
+    if(remaining > 0)
+    {
+        remainingStr = "You can still eat " + std::to_string(remaining) + " calories to stay in target" + '\n';
+    }
+    else
+    {
+        remainingStr = "You are " + std::to_string(-remaining) + " calories over your daily goal" + '\n';
+    }
+
     std::string summary = "Calories for this date: " + std::to_string(cal) + '\n'
             + "Protein: " + std::to_string(prot) + '\n'
             + "Fat: " + std::to_string(fat) + '\n'
-            + "Carb: " + std::to_string(carb);
+            + "Carb: " + std::to_string(carb) + '\n';
 
     file.close();
-    return  summary;
+    return  summary + remainingStr;
 }
 
 std::string Logger::summary() const
@@ -97,7 +107,6 @@ void Logger::readTarget()
     try
     {
         targetCals_ = std::stoi(line);
-        std::cout << targetCals_ << std::endl;
     }
     catch (std::exception& e)
     {
